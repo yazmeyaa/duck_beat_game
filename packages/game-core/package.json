@@ -1,0 +1,25 @@
+{
+  "name": "@duck_beat/game-core",
+  "version": "1.0.0",
+  "main": "dist/game.umd.js",
+  "module": "dist/game.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./engine": "./src/engine/index.ts",
+    "./core": "./src/core/index.ts",
+    "./game": "./src/game/index.ts"
+  },
+  "scripts": {
+    "build": "vite build",
+    "clean": "rm -rf dist",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@duck_beat/eslint-config": "workspace:*",
+    "@duck_beat/ts-config": "workspace:*",
+    "eslint": "^9.25.0",
+    "pixi.js": "^8.10.1",
+    "vite": "^6.3.5"
+  }
+}

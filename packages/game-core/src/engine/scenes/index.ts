@@ -1,0 +1,1 @@
+export { GameScenesManager as PixiSceneManager } from './scenes-manager'

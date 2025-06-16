@@ -1,0 +1,9 @@
+{
+  "extends": "@duck_beat/ts-config/tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": true,
+    "lib": ["ES2015", "DOM"],
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}

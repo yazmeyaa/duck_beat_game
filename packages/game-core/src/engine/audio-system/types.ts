@@ -8,7 +8,7 @@ export interface BackgroundAudio {
 
 export interface SoundEffects {
     play(name: string): void;
-    preload(src: string): Promise<void>;
+    preload(src: string, key: string): Promise<void>;
     setVolume(name: string, volume: number): void;
 }
 

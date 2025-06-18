@@ -4,9 +4,9 @@ import type { SoundEffects } from "../types";
  * WEB SFX implementation
  */
 export class WebAudioEffects implements SoundEffects {
-    private _audioContext: AudioContext;
-    private _sounds: Map<string, AudioBuffer> = new Map();
-    private _gainNodes: Map<string, GainNode> = new Map();
+    private readonly _audioContext: AudioContext;
+    private readonly _sounds: Map<string, AudioBuffer> = new Map();
+    private readonly _gainNodes: Map<string, GainNode> = new Map();
 
     constructor(ctx: AudioContext) {
         this._audioContext = ctx;
@@ -25,11 +25,9 @@ export class WebAudioEffects implements SoundEffects {
         source.start();
     }
 
-    public async preload(src: string): Promise<void> {
+    public async preload(src: string, key: string): Promise<void> {
         const response = await fetch(src);
         const arrayBuffer = await response.arrayBuffer();
-        // TODO: IMPLEMENT NORMAL WAY KEY EXTRACTION
-        const key = 'IMPLEMENT THIS RIGHT!'
         const buffer = await this._audioContext.decodeAudioData(arrayBuffer)
         this._sounds.set(key, buffer);
     }

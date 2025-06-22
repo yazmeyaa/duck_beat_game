@@ -22,12 +22,6 @@ const GameElement: FC = () => {
       scenes: manager
     })
 
-    canvasRef.current.focus();
-
-    gameRef.current?.engine.input.keyboard.on('down', (key) => {
-      console.log(`Pressed key: ${key}`);
-    })
-
     gameRef.current = game;
   }, [])
 

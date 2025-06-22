@@ -1,5 +1,5 @@
-import type { SceneFactory, SceneManager } from "../../core/scene";
-import type { Scene } from "../../core/scene/scene";
+import type { SceneFactory, SceneManager } from "./manager";
+import type { Scene } from "./scene";
 
 /**
  * Scenes manger. Able to preload, switch and dispose scenes.

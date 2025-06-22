@@ -1,4 +1,4 @@
-import type { Renderable } from "../types";
+import type { Renderable } from "../render-system";
 
 export interface Scene {
     update(dt: number): void;

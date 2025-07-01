@@ -1,12 +1,15 @@
-import type { EventManager } from "../core/events"
-import type { SceneManager } from "../core/scene"
-import type { Engine } from "../engine/engine"
+import { EventManager } from "../core/events"
+import { GameScenesManager } from "../engine/scenes/scenes-manager"
+import type { AudioSystem } from "../engine/audio-system"
+import type { InputSystem } from "../engine/input-system"
+import type { RenderSystem } from "../engine/render-system"
+import type { SceneManager } from "../engine/scenes"
 import type { GameEvents } from "./events"
 
 export type GameConstructor = {
-    events: EventManager<GameEvents>
-    scenes: SceneManager
-    engine: Engine
+    audio: AudioSystem;
+    input: InputSystem;
+    renderer: RenderSystem;
 }
 
 /**
@@ -15,12 +18,16 @@ export type GameConstructor = {
 export class Game {
     public events: EventManager<GameEvents>
     public scenes: SceneManager
-    public engine: Engine
+    public audio: AudioSystem;
+    public input: InputSystem;
+    public renderer: RenderSystem;
 
     constructor(props: GameConstructor) {
-        this.events = props.events;
-        this.scenes = props.scenes;
-        this.engine = props.engine
+        this.audio = props.audio;
+        this.input = props.input;
+        this.renderer = props.renderer;
+        this.events = new EventManager<GameEvents>();
+        this.scenes = new GameScenesManager(this);
     }
 }
 

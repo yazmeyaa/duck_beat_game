@@ -1,6 +1,7 @@
-import { WebAudioEffects, WebAudioSystem, WebBackgroundAudio, WebGameTrackAudio } from "../audio-system/web-audio";
-import { Engine } from "../engine";
-import { WebInputSystem, WebKeyboardSystem, WebPointerSystem } from "../input-system/drivers/web";
+import { Game } from "..";
+import { WebAudioEffects, WebAudioSystem, WebBackgroundAudio, WebGameTrackAudio } from "../../engine/audio-system/web-audio";
+import { WebInputSystem, WebKeyboardSystem, WebPointerSystem } from "../../engine/input-system/drivers/web";
+import type { RenderSystem } from "../../engine/render-system";
 
 export type CreateWebEngineProps = {
     targetElement: HTMLElement;
@@ -11,7 +12,7 @@ export type CreateWebEngineProps = {
  * @param {CreateWebEngineProps} props Props to create engine
  * @returns {Engine} - WEB game engine.
  */
-export function createWebEngine(props: CreateWebEngineProps): Engine {
+export function createWebGame(props: CreateWebEngineProps): Game {
     /*__________________AUDIO______________________ */
     const audioContext = new AudioContext();
     const sfx = new WebAudioEffects(audioContext);
@@ -28,9 +29,12 @@ export function createWebEngine(props: CreateWebEngineProps): Engine {
     const inputSystem = new WebInputSystem({ keyboard, pointer })
     /*_____________________________________________ */
 
-    const engine = new Engine({
+    const renderer: RenderSystem = null as unknown as RenderSystem;
+
+    const engine = new Game({
         audio: audioSystem,
         input: inputSystem,
+        renderer,
     })
 
     return engine;

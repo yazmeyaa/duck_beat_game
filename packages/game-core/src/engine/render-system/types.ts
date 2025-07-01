@@ -1,3 +1,5 @@
+import type { Point2D } from "../../core/math/point2d";
+
 export type RGBAColor = {
     r: number;
     g: number;
@@ -40,4 +42,15 @@ export interface DrawContext extends
 
 export interface Renderable {
     render(ctx: DrawContext): void
+}
+
+export interface RenderableNode {
+    children?: Renderable[];
+    position: Point2D;
+    rotation: number;
+    scale: number;
+}
+
+export interface RenderSystem {
+    renderNode(node: RenderableNode): void;
 }

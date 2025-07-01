@@ -7,4 +7,4 @@ export interface SceneManager {
     unload(name: string): void;
 }
 
-export type SceneFactory = Promise<Scene> | Scene;
+export type SceneFactory = () => Scene | Promise<Scene>;

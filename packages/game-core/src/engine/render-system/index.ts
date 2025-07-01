@@ -1,1 +1,1 @@
-export type { DrawContext, DrawTextOptions, RGBAColor, Renderable, SpriteDrawer, SpriteDrawerOptions, TextDrawer, Texture } from './types'
+export type { DrawContext, DrawTextOptions, RGBAColor, Renderable, SpriteDrawer, SpriteDrawerOptions, TextDrawer, Texture, RenderSystem, RenderableNode } from './types'

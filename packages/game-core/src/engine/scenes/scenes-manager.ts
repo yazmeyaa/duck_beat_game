@@ -1,3 +1,4 @@
+import type { Game } from "../../game";
 import type { SceneFactory, SceneManager } from "./manager";
 import type { Scene } from "./scene";
 
@@ -7,6 +8,11 @@ import type { Scene } from "./scene";
 export class GameScenesManager implements SceneManager {
     private _currentScene: Scene | null = null;
     private _scenes: Map<string, Scene> = new Map();
+    private _game: Game;
+
+    constructor(game: Game) {
+        this._game = game;
+    }
 
     async switchTo(name: string): Promise<void> {
         if (!this._scenes.has(name)) return;
@@ -14,7 +20,7 @@ export class GameScenesManager implements SceneManager {
 
         this._currentScene?.onExit?.();
 
-        next.init?.();
+        await next.init(this._game);
         next.onEnter?.();
         this._currentScene = next;
     }
@@ -31,13 +37,15 @@ export class GameScenesManager implements SceneManager {
     }
 
     public register(name: string, factory: SceneFactory): void {
-        if (factory instanceof Promise) {
-            factory.then(s => this.addScene(name, s));
-            return;
+        const result = factory();
+
+        if (result instanceof Promise) {
+            result.then(scene => this.addScene(name, scene));
+        } else {
+            this.addScene(name, result);
         }
-        this.addScene(name, factory);
     }
-    
+
     public unload(name: string): void {
         if (!this._scenes.has(name)) return;
         const scene = this._scenes.get(name)!;

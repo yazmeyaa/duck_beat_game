@@ -44,7 +44,7 @@ export interface Renderable {
     render(ctx: DrawContext): void
 }
 
-export interface RenderableNode {
+export interface RenderableNode extends Renderable {
     children?: Renderable[];
     position: Point2D;
     rotation: number;
@@ -53,4 +53,5 @@ export interface RenderableNode {
 
 export interface RenderSystem {
     renderNode(node: RenderableNode): void;
+    init(): Promise<void>
 }

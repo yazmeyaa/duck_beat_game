@@ -1,4 +1,4 @@
-import type { PointerState, PointerSystem } from "../../pointer";
+import type { PointerState, PointerSystem } from "../../../engine/input-system/pointer";
 
 /**
  * Web PointerSystem implementation

@@ -1,4 +1,4 @@
-import type { KeyboardSystem, OnKeyHandler } from "../../keyboard";
+import type { KeyboardSystem, OnKeyHandler } from "../../../engine/input-system/keyboard";
 
 /**
  * WEB KeyboardSystem implementation

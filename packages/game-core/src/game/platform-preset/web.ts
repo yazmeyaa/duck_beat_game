@@ -1,10 +1,12 @@
 import { Game } from "..";
-import { WebAudioEffects, WebAudioSystem, WebBackgroundAudio, WebGameTrackAudio } from "../../engine/audio-system/web-audio";
-import { WebInputSystem, WebKeyboardSystem, WebPointerSystem } from "../../engine/input-system/drivers/web";
-import type { RenderSystem } from "../../engine/render-system";
+import { WebAudioEffects, WebAudioSystem, WebBackgroundAudio, WebGameTrackAudio } from "../../drivers/audio/web";
+import { WebInputSystem, WebKeyboardSystem, WebPointerSystem } from "../../drivers/input/web";
+import { PixiTextureFactory } from "../../drivers/render/pixi/pixi-texture-factory";
+import { PixiRenderSystem } from "../../drivers/render/pixi/render-system";
+import { WebResourceManager } from "../../drivers/resources/web/resource-manager";
 
 export type CreateWebEngineProps = {
-    targetElement: HTMLElement;
+    targetElement: HTMLCanvasElement;
 };
 
 /**
@@ -29,13 +31,17 @@ export function createWebGame(props: CreateWebEngineProps): Game {
     const inputSystem = new WebInputSystem({ keyboard, pointer })
     /*_____________________________________________ */
 
-    const renderer: RenderSystem = null as unknown as RenderSystem;
+    const renderer = new PixiRenderSystem(props.targetElement);
+    const pixiTextureFactory = new PixiTextureFactory();
 
-    const engine = new Game({
+    const resources = new WebResourceManager(audioContext, pixiTextureFactory);
+
+    const game = new Game({
         audio: audioSystem,
         input: inputSystem,
         renderer,
+        resources
     })
 
-    return engine;
+    return game;
 }

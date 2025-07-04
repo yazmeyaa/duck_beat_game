@@ -10,7 +10,9 @@
     "isolatedModules": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "lib": ["ES2015"],
+    "lib": [
+      "ES2015"
+    ],
     "target": "es2015",
     "noUnusedLocals": false,
     "noUnusedParameters": false,

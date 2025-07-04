@@ -1,4 +1,4 @@
-import type { AudioSystem, BackgroundAudio, GameTrackAudio, SoundEffects } from "../types";
+import type { AudioSystem, BackgroundAudio, GameTrackAudio, SoundEffects } from "../../../engine/audio-system";
 
 export type WebAudioSystemConstructor = {
     bg: BackgroundAudio;

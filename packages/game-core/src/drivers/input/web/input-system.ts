@@ -1,6 +1,6 @@
-import type { KeyboardSystem } from "../../keyboard";
-import type { PointerSystem } from "../../pointer";
-import type { InputSystem } from "../../types";
+import type { InputSystem } from "../../../engine/input-system";
+import type { KeyboardSystem } from "../../../engine/input-system/keyboard";
+import type { PointerSystem } from "../../../engine/input-system/pointer";
 
 export type WebInputSystemConstructor = {
     pointer: PointerSystem;

@@ -1,9 +1,9 @@
-import type { GameTrackAudio } from "../types";
+import type { BackgroundAudio } from "../../../engine/audio-system";
 
 /**
- * Web GameTrackAudio implementation
+ * WEB audio system implementation
  */
-export class WebGameTrackAudio implements GameTrackAudio {
+export class WebBackgroundAudio implements BackgroundAudio {
     private _audioBuffer: AudioBuffer | null = null;
     private _audioContext: AudioContext;
     private _source: AudioBufferSourceNode | null = null;
@@ -15,9 +15,6 @@ export class WebGameTrackAudio implements GameTrackAudio {
     constructor(audioContext: AudioContext) {
         this._audioContext = audioContext;
         this._gainNode = this._audioContext.createGain();
-    }
-    public setVolume(volume: number): void {
-        this._gainNode.gain.setValueAtTime(volume, this._audioContext.currentTime);
     }
 
     public async load(src: string): Promise<void> {
@@ -64,30 +61,8 @@ export class WebGameTrackAudio implements GameTrackAudio {
         this._isPaused = true;
     }
 
-    public seek(time: number): void {
-        if (!this._audioBuffer) throw new Error('track is not loaded');
-        const wasPlaying = this.isPlaying();
-        if (this._source) {
-            this._source.stop();
-            this._source = null;
-        }
-        this._offset = time;
-        if (wasPlaying) {
-            this._source = this._audioContext.createBufferSource();
-            this._source.buffer = this._audioBuffer;
-            this._source.connect(this._audioContext.destination);
-            this._startTime = this._audioContext.currentTime - time;
-            this._source.start(0, time);
-            this._isPaused = false;
-        }
-    }
-
-    public getTime(): number {
-        return this._audioContext.currentTime;
-    }
-
-    public isPlaying(): boolean {
-        return !this._isPaused
+    public setVolume(volume: number): void {
+        this._gainNode.gain.setValueAtTime(volume, this._audioContext.currentTime);
     }
 
 }

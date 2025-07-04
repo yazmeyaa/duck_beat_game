@@ -32,6 +32,10 @@ export class GameScenesManager implements SceneManager {
         return this._currentScene;
     }
 
+    public update(dt: number): void {
+        this._currentScene?.update(dt);
+    }
+
     private addScene(name: string, scene: Scene): void {
         this._scenes.set(name, scene);
     }

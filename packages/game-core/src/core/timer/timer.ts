@@ -34,4 +34,14 @@ export class Timer {
     public getElapsed(): number {
         return this._elapsedTime;
     }
+
+    public stop(): void {
+        this.reset();
+        this.pause();
+    }
+
+    public start(): void {
+        this.reset();
+        this.resume();
+    }
 }

@@ -5,11 +5,14 @@ import type { InputSystem } from "../engine/input-system"
 import type { RenderSystem } from "../engine/render-system"
 import type { SceneManager } from "../engine/scenes"
 import type { GameEvents } from "./events"
+import type { ResourceManager } from "../engine/resources"
+import { Timer } from "../core/timer"
 
 export type GameConstructor = {
     audio: AudioSystem;
     input: InputSystem;
     renderer: RenderSystem;
+    resources: ResourceManager;
 }
 
 /**
@@ -21,6 +24,8 @@ export class Game {
     public audio: AudioSystem;
     public input: InputSystem;
     public renderer: RenderSystem;
+    public resources: ResourceManager
+    public globalTimer: Timer
 
     constructor(props: GameConstructor) {
         this.audio = props.audio;
@@ -28,6 +33,24 @@ export class Game {
         this.renderer = props.renderer;
         this.events = new EventManager<GameEvents>();
         this.scenes = new GameScenesManager(this);
+        this.resources = props.resources;
+        this.globalTimer = new Timer();
+    }
+
+    public async init(): Promise<void> {
+        await Promise.all([
+            this.renderer.init(),
+        ])
+    }
+
+    public update(dt: number): void {
+        this.globalTimer.update(dt);
+        this.scenes.update(dt);
+        this.input.keyboard.update();
+        this.input.pointer.update();
+        for (const renderable of this.scenes.getCurrent().getRenderables()) {
+            this.renderer.renderNode(renderable);
+        }
     }
 }
 

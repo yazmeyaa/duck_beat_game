@@ -1,5 +1,5 @@
-import type { DrawContext, DrawTextOptions, SpriteDrawerOptions, Texture } from '..'
 import { Sprite, Text, TextStyle, type Container, type Renderer, type Texture as PixiTexture } from 'pixi.js'
+import type { DrawContext, DrawTextOptions, SpriteDrawerOptions, Texture } from '../../../engine/render-system';
 
 /**
  *
@@ -48,7 +48,7 @@ export class PixiRenderingContext implements DrawContext {
     }
 
     public renderFrame(): void {
-        this.pixiRenderer.render(this.sceneContainer);
         this.sceneContainer.removeChildren();
+        this.pixiRenderer.render(this.sceneContainer);
     }
 }

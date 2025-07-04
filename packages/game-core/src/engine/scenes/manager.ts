@@ -5,6 +5,7 @@ export interface SceneManager {
     getCurrent(): Scene;
     register(name: string, factory: SceneFactory): void;
     unload(name: string): void;
+    update(dt: number): void;
 }
 
 export type SceneFactory = () => Scene | Promise<Scene>;

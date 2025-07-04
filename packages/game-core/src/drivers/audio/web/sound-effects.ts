@@ -1,4 +1,4 @@
-import type { SoundEffects } from "../types";
+import type { SoundEffects } from "../../../engine/audio-system";
 
 /**
  * WEB SFX implementation

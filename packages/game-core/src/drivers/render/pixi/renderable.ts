@@ -1,5 +1,5 @@
 import { type Texture as PixiTexture } from "pixi.js";
-import type { Texture } from "..";
+import type { Texture } from "../../../engine/render-system";
 
 /**
  * Game engine pixi texture
